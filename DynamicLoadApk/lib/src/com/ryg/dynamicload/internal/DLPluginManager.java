@@ -51,25 +51,25 @@ public class DLPluginManager {
     private static final String TAG = "DLPluginManager";
 
     /**
-     * return value of {@link #startPluginActivity(Activity, DLIntent)} start
+     * return value of {@link #startPluginActivity(Context, DLIntent)} start
      * success
      */
     public static final int START_RESULT_SUCCESS = 0;
 
     /**
-     * return value of {@link #startPluginActivity(Activity, DLIntent)} package
+     * return value of {@link #startPluginActivity(Context, DLIntent)} package
      * not found
      */
     public static final int START_RESULT_NO_PKG = 1;
 
     /**
-     * return value of {@link #startPluginActivity(Activity, DLIntent)} class
+     * return value of {@link #startPluginActivity(Context, DLIntent)} class
      * not found
      */
     public static final int START_RESULT_NO_CLASS = 2;
 
     /**
-     * return value of {@link #startPluginActivity(Activity, DLIntent)} class
+     * return value of {@link #startPluginActivity(Context, DLIntent)} class
      * type error
      */
     public static final int START_RESULT_TYPE_ERROR = 3;
@@ -210,7 +210,7 @@ public class DLPluginManager {
     }
 
     /**
-     * {@link #startPluginActivityForResult(Activity, DLIntent, int)}
+     * {@link #startPluginActivityForResult(Context, DLIntent, int)}
      */
     public int startPluginActivity(Context context, DLIntent dlIntent) {
         return startPluginActivityForResult(context, dlIntent, -1);
@@ -367,7 +367,12 @@ public class DLPluginManager {
         fetchProxyServiceClass.onFetch(START_RESULT_SUCCESS, proxyServiceClass);
     }
 
-    // zhangjie1980 重命名 loadPluginActivityClass -> loadPluginClass
+    /**
+     * 加载 被代理 activity 类
+     * @param classLoader
+     * @param className
+     * @return
+     */
     private Class<?> loadPluginClass(ClassLoader classLoader, String className) {
         Class<?> clazz = null;
         try {
@@ -379,6 +384,12 @@ public class DLPluginManager {
         return clazz;
     }
 
+    /**
+     * 获得Activity 类的全部路径
+     * @param dlIntent
+     * @param pluginPackage
+     * @return
+     */
     private String getPluginActivityFullPath(DLIntent dlIntent, DLPluginPackage pluginPackage) {
         String className = dlIntent.getPluginClass();
         className = (className == null ? pluginPackage.defaultActivity : className);

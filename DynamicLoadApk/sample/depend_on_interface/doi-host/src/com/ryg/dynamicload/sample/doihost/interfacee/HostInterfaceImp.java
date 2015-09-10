@@ -11,4 +11,9 @@ public class HostInterfaceImp implements HostInterface {
     public void hostMethod(Context context) {
         new HostComponent().doSomething(context);
     }
+
+    @Override
+    public void startPlugin(Context context) {
+
+    }
 }

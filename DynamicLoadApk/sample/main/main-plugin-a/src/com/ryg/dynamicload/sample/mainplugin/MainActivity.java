@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ryg.dynamicload.DLBasePluginActivity;
 import com.ryg.dynamicload.internal.DLIntent;
@@ -42,6 +43,13 @@ public class MainActivity extends DLBasePluginActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         layout.setBackgroundColor(Color.parseColor("#F79AB5"));
+
+        TextView textView = new TextView(context);
+        textView.setText("Hello, I'm Plugin A.");
+        textView.setTextSize(30);
+        layout.addView(textView, LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT);
+
         Button button = new Button(context);
         button.setText("Start TestActivity");
         layout.addView(button, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);

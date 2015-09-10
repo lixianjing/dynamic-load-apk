@@ -39,7 +39,7 @@ public class TestFragmentActivity extends DLBasePluginFragmentActivity
 
         Log.d(TAG, "### person info : " + getIntent().getExtras().getParcelable("person"));
         TestButton button = (TestButton) findViewById(R.id.button1);
-        button.setText(that.getResources().getString(R.string.test));
+        button.setText("点击退出");
         button.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -83,11 +83,18 @@ public class TestFragmentActivity extends DLBasePluginFragmentActivity
             transaction.addToBackStack("TestFragment#1");
             transaction.commit();
         } else if (v == mStartPluginB) {
-            int result = startPluginActivity(new DLIntent("com.ryg.dynamicload.sample.mainpluginb",
-                    ".MainActivity"));
-            if (result != DLPluginManager.START_RESULT_SUCCESS) {
-                Toast.makeText(this, "start Activity failed", Toast.LENGTH_SHORT).show();
+            try {
+                int result = startPluginActivity(new DLIntent("com.ryg.dynamicload.sample.mainpluginb",
+                        ".MainActivity"));
+                if (result != DLPluginManager.START_RESULT_SUCCESS) {
+                    Toast.makeText(this, "start Activity failed", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
             }
+
         }
 
     }

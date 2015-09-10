@@ -9,7 +9,7 @@ public class HostInterfaceManager {
     public static HostInterface getHostInterface() {
         return hostInterface;
     }
-    
+
     public static void setHostInterface(HostInterface hostInterface) {
         HostInterfaceManager.hostInterface = hostInterface;
     }
